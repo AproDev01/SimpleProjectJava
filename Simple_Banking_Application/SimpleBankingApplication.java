@@ -1,175 +1,178 @@
 import java.util.Scanner;
 
 public class SimpleBankingApplication {
-    
-        private String Nom;
-        long NembreAccount;
-        private String AccountType;
-        private long SoldeAccount;
-        long SoldeDeposer;
-        long SoldeRetirer;
+    private String nom;
+    private long numeroCompte;
+    private String typeCompte;
+    private long solde;
 
-        Scanner sc=new Scanner(System.in);
-    
-     //method to open new account           (methode de creation de neuveau account) 
-    public void DetailAccount(){
+    private static final Scanner sc = new Scanner(System.in);
+
+    // création d’un nouveau compte
+    public void creerCompte() {
+        System.out.print("Entrer le nom du titulaire : ");
+        nom = sc.nextLine();
+
+        System.out.print("Entrer le numéro de compte : ");
         
+        numeroCompte = sc.nextLong();
+        sc.nextLine(); // vider le buffer
 
-        System.out.println("Entrer le Nom:");
-        Nom= sc.nextLine();
+        System.out.print("Entrer le type de compte : ");
+        typeCompte = sc.nextLine();
 
-        System.out.println("Entrer le numero de compte:");
-        NembreAccount= sc.nextLong();
+        System.out.print("Entrer le solde initial : ");
+        solde = sc.nextLong();
         sc.nextLine();
 
-        System.out.println("Entrer le type de compte:");
-        AccountType= sc.nextLine();
-        
-        System.out.println("Entrer le solde de votre compte:");
-        SoldeAccount= sc.nextLong();
-
-    }
-    //method to display account details    (affichage du votre compte)
-    public void Affichage(){
-        System.out.println("*****************detail de votre compte********************");
-        System.out.println("le Nom est:"+ Nom);
-        System.out.println("le numero de compte:"+NembreAccount);
-        System.out.println(" le type de compte:"+AccountType);
-        System.out.println(" le solde de votre compte est:"+SoldeAccount);
+        System.out.println("Compte créé avec succès !");
     }
 
-    //method to deposit money              (mettre une solde dans votre compte)
-     public void PoserUneSolde(){
-        System.out.println("donner le solde que tu vas deposer:");
-        long SoldeDeposer=sc.nextLong();
+    // affichage des détails du compte
+    public void afficherDetails() {
+        System.out.println("\n------ Détails du compte ------");
+        System.out.println("Titulaire       : " + nom);
+        System.out.println("Numéro de compte: " + numeroCompte);
+        System.out.println("Type de compte  : " + typeCompte);
+        System.out.println("Solde actuel    : " + solde + " DH");
+        System.out.println("--------------------------------");
+    }
 
+    // dépôt d’argent
+    public void deposer() {
+        System.out.print("Entrer le montant à déposer : ");
+        long montant = sc.nextLong();
         sc.nextLine();
-         
-        SoldeDeposer = SoldeAccount + SoldeDeposer;
-        System.out.println("danc votre solde de votre account sera:"+ SoldeDeposer);
 
-
-     }
-    //method to withdraw money    (méthode pour retirer de l'argent)
-    public void RetirerSolde(){
-        System.out.println("donner le solde que tu vas Retirer:");
-        long SoldeRetirer=sc.nextInt();
-       if(SoldeAccount > SoldeRetirer){
-        
-        SoldeAccount=SoldeAccount - SoldeRetirer;
-        
-        System.out.println("Solde après retrait:"+SoldeAccount);
-       }
-       else{
-      System.out.println("Votre solde est inférieur à " + SoldeAccount + " le retrait a échoué");
-       }
-    }
-     //method to search an account number    (méthode pour rechercher un numéro de compte)
-     public boolean search(Long NembreAccountUser) {  
-        if (NembreAccount == NembreAccountUser) {  
-            Affichage();  
-            return (true);  
-        }  
-        else{
-            System.out.println("le numero de compte n existe pas");
-        return (false);
-        }  
-    }  
-     public static void main(String[] args){
-        Scanner sc= new Scanner(System.in);
-        int n;
-
-        System.out.print("Combien de compte souhaitez-vous saisir ?");
-        n = sc.nextInt();  
-        SimpleBankingApplication LeCompteNumero[] = new SimpleBankingApplication[n];
-      
-
-        for (int i = 0; i < LeCompteNumero.length; i++) {  
-            
-            System.out.println("\n*********le compte numero "+ (i+1)+"*************\n");
-            LeCompteNumero[i] = new SimpleBankingApplication() ;  
-            LeCompteNumero[i].DetailAccount();  
-        } 
-
-        System.out.println("\n ***************welcome to banking Application***********\n");
-        System.out.println("\n 1-afficher tous les détails du compte"+
-                           "\n 2-recherche par numéro de compte "+
-                           "\n 3- ajeuter un montant dans le compte"+
-                           "\n 4-retirer un montant dans le compte"+
-                           "\n 5-Exit");
-
-        int numero=sc.nextInt();
-
-        switch (numero) {
-            case 1:
-            {
-                 for (int i = 0; i < LeCompteNumero.length; i++) {  
-            
-                System.out.println("\n*********le compte numero "+ (i+1)+"*************\n"); 
-                   LeCompteNumero[i].Affichage();  
-                
-                }
-                break;
-                
-            }
-            case 2:
-            {
-                
-                
-               // boolean found = false;  
-                for (int i = 0; i < LeCompteNumero.length; i++) {
-                 System.out.println("\n*********le compte numero "+ (i+1)+"*************\n");
-
-                 System.out.print("donner le numero de comptre:");
-                 Long NembreAccountUser=sc.nextLong();
-
-                 LeCompteNumero[i].search(NembreAccountUser);  
-
-                 /*if (found) {  
-                    break;  
-                }  
-                  
-                if (!found) {  
-                   System.out.println("La recherche a échoué ! Le compte n'existe pas.. !!");  
-                }  */
-                }
-                break;
-            }
-            case 3:
-            {
-                 for (int i = 0; i < LeCompteNumero.length; i++) {  
-            
-                System.out.println("\n*********le compte numero "+ (i+1)+"*************\n");
-               // LeCompteNumero[i] = new SimpleBankingApplication() ;  
-                LeCompteNumero[i].PoserUneSolde();  
-                } 
-                break;
-            }
-            case 4:
-            {
-                 for (int i = 0; i < LeCompteNumero.length; i++) {  
-            
-                System.out.println("\n*********le compte numero "+ (i+1)+"*************\n");
-               // LeCompteNumero[i] = new SimpleBankingApplication() ;  
-                LeCompteNumero[i].RetirerSolde();  
-                } 
-                break;
-            }
-                
-               
-            case 5:{
-                System.out.println("A bientot");
-                break;
-            }
-
-            default:
-            System.out.println("donner le nembre entre 1 et 5");
-                break;
+        if (montant > 0) {
+            solde += montant;
+            System.out.println("✅ Dépôt effectué. Nouveau solde : " + solde + " DH");
+        } else {
+            System.out.println("⚠️ Montant invalide !");
         }
-        sc.close();
-
-
     }
-    
-    
+
+    //  retrait d’argent
+    public void retirer() {
+        System.out.print("Entrer le montant à retirer : ");
+        long montant = sc.nextLong();
+        sc.nextLine();
+
+        if (montant <= 0) {
+            System.out.println("⚠️ Montant invalide !");
+        } else if (montant > solde) {
+            System.out.println("❌ Fonds insuffisants !");
+        } else {
+            solde -= montant;
+            System.out.println("✅ Retrait effectué. Nouveau solde : " + solde + " DH");
+        }
+    }
+
+    // rechercher un compte par numéro
+    public boolean rechercherCompte(long numeroRecherche) {
+        if (numeroCompte == numeroRecherche) {
+            afficherDetails();
+            return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.print("Combien de comptes souhaitez-vous créer ? ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        SimpleBankingApplication[] comptes = new SimpleBankingApplication[n];
+
+        // Création des comptes
+        for (int i = 0; i < n; i++) {
+            System.out.println("\n--- Création du compte n°" + (i + 1) + " ---");
+            comptes[i] = new SimpleBankingApplication();
+            comptes[i].creerCompte();
+        }
+
+        // Menu principal (boucle)
+        int choix;
+        do {
+            System.out.println("\n===== Menu Banque =====");
+            System.out.println("1️⃣  Afficher tous les comptes");
+            System.out.println("2️⃣  Rechercher un compte");
+            System.out.println("3️⃣  Déposer de l’argent");
+            System.out.println("4️⃣  Retirer de l’argent");
+            System.out.println("5️⃣  Quitter");
+            System.out.print("👉 Votre choix : ");
+            choix = sc.nextInt();
+            sc.nextLine();
+
+            switch (choix) {
+                case 1:
+                    for (SimpleBankingApplication compte : comptes) {
+                        compte.afficherDetails();
+                    }
+                    break;
+
+                case 2:
+                    System.out.print("Entrer le numéro de compte à rechercher : ");
+                    long numeroRecherche = sc.nextLong();
+                    sc.nextLine();
+                    boolean trouve = false;
+                    for (SimpleBankingApplication compte : comptes) {
+                        if (compte.rechercherCompte(numeroRecherche)) {
+                            trouve = true;
+                            break;
+                        }
+                    }
+                    if (!trouve) {
+                        System.out.println("❌ Aucun compte trouvé avec ce numéro.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Entrer le numéro de compte : ");
+                    long numeroDepot = sc.nextLong();
+                    sc.nextLine();
+                    boolean trouveDepot = false;
+                    for (SimpleBankingApplication compte : comptes) {
+                        if (compte.rechercherCompte(numeroDepot)) {
+                            compte.deposer();
+                            trouveDepot = true;
+                            break;
+                        }
+                    }
+                    if (!trouveDepot) {
+                        System.out.println("❌ Compte introuvable !");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Entrer le numéro de compte : ");
+                    long numeroRetrait = sc.nextLong();
+                    sc.nextLine();
+                    boolean trouveRetrait = false;
+                    for (SimpleBankingApplication compte : comptes) {
+                        if (compte.rechercherCompte(numeroRetrait)) {
+                            compte.retirer();
+                            trouveRetrait = true;
+                            break;
+                        }
+                    }
+                    if (!trouveRetrait) {
+                        System.out.println("❌ Compte introuvable !");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("👋 Merci d’avoir utilisé notre application bancaire !");
+                    break;
+
+                default:
+                    System.out.println("⚠️ Choix invalide, veuillez réessayer.");
+            }
+
+        } while (choix != 5);
+
+        sc.close();
+    }
+
 }
