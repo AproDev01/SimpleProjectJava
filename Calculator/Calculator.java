@@ -1,52 +1,50 @@
 import java.util.Scanner;
+
 public class Calculator {
-    public static void calcul(){
 
-        Scanner sc= new Scanner(System.in);
-        System.out.println("dommer le premier nembre:");
-        int nembre1=sc.nextInt();
+    public static void calcul() {
+        Scanner sc = new Scanner(System.in);
 
-        
-        System.out.println("dommer le deuxieme nembre:");
-        int nembre2=sc.nextInt();
+        System.out.print("Donne le premier nombre: ");
+        int nombre1 = sc.nextInt();
 
-        System.out.println("quel est  l operation que vous peuver calculer('+' ,'-','x','%','/') ");
-        String operation=sc.next();
+        System.out.print("Donne le deuxième nombre: ");
+        int nombre2 = sc.nextInt();
 
-        int result=operation(nembre1,nembre2,operation);
-        System.out.println("le resultat est :"+result);
+        System.out.print("Choisis une opération (+, -, *, /): ");
+        String op = sc.next();
+
+        int result = 0;
+        switch (op) {
+            case "+":
+                result = nombre1 + nombre2;
+                break;
+            case "-":
+                result = nombre1 - nombre2;
+                break;
+            case "*":
+                result = nombre1 * nombre2;
+                break;
+            case "/":
+                if (nombre2 != 0)
+                    result = nombre1 / nombre2;
+                else {
+                    System.out.println("Erreur : division par zéro !");
+                    sc.close();
+                    return;
+                }
+                break;
+            default:
+                System.out.println("Opération non reconnue !");
+                sc.close();
+                return;
+        }
+
+        System.out.println("Résultat : " + result);
         sc.close();
     }
-        public static int operation(int nembre1,int nembre2,String operation){
-            int result =0;
-       
-            if (operation.equals("+")) {
-                result = nembre1 + nembre2;
-            }
-            
-            else if (operation.equals("-")) {
-                result = nembre1 - nembre2;
-            }
-            else if (operation.equals("x")) {
-                result = nembre1 * nembre2;
-            }
-            else if (operation.equals("%")) {
-                result = nembre1  % nembre2;
-            }
-            else if (operation.equals("/")) {
-                result = nembre1 / nembre2;
-            }
-            else {
-                System.out.println("Invalid operation");
-            }
-            return result;
-        }
-    
-     
-         public static void main(String[] args){
-            calcul();
 
-        }
-        
-    
+    public static void main(String[] args) {
+        calcul();
+    }
 }
